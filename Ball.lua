@@ -15,9 +15,10 @@
 
 Ball = Class{}
 
-function Ball:init(x, y, width, height)
+function Ball:init(x, y, z, width, height)
     self.x = x
     self.y = y
+    self.z = z
     self.width = width
     self.height = height
 
@@ -25,6 +26,7 @@ function Ball:init(x, y, width, height)
     -- X and Y axis, since the ball can move in two dimensions
     self.dy = math.random(2) == 1 and -100 or 100
     self.dx = math.random(2) == 1 and math.random(-80, -100) or math.random(80, 100)
+    self.dz = 0
 end
 
 --[[
@@ -55,8 +57,10 @@ end
 function Ball:reset()
     self.x = VIRTUAL_WIDTH / 2 - 2
     self.y = TOP_VIEW_HEIGHT / 2 - 2
+    self.z = SIDE_VIEW_HEIGHT * 2 / 3
     self.dy = math.random(2) == 1 and -100 or 100
     self.dx = math.random(-50, 50)
+    self.dz = 0
 end
 
 --[[
@@ -65,8 +69,12 @@ end
 function Ball:update(dt)
     self.x = self.x + self.dx * dt
     self.y = self.y + self.dy * dt
+
+    self.dz = self.dz + GRAVITY
+    self.z = self.z + self.dz * dt
 end
 
 function Ball:render()
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+    love.graphics.rectangle('fill', self.x, VIRTUAL_HEIGHT - self.z, self.width, self.height)
 end

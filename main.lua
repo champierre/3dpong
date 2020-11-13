@@ -50,6 +50,9 @@ TOP_VIEW_HEIGHT = VIRTUAL_HEIGHT - SIDE_VIEW_HEIGHT
 -- speed at which we will move our paddle; multiplied by dt in update
 PADDLE_SPEED = 200
 
+GRAVITY = -2
+REFLECTION_COEFFICIENT = 0.8
+
 --[[
     Runs when the game first starts up, only once; used to initialize the game.
 ]]
@@ -100,7 +103,7 @@ function love.load()
     -- initialize player paddles and ball
     player1 = Paddle(10, 30, 5, 20)
     player2 = Paddle(VIRTUAL_WIDTH - 15, TOP_VIEW_HEIGHT - 30, 5, 20)
-    ball = Ball(VIRTUAL_WIDTH / 2 - 2, TOP_VIEW_HEIGHT / 2 - 2, 4, 4)
+    ball = Ball(VIRTUAL_WIDTH / 2 - 2, TOP_VIEW_HEIGHT / 2 - 2, SIDE_VIEW_HEIGHT / 3 * 2, 4, 4)
 
     gameState = 'start'
 end
@@ -169,6 +172,12 @@ function love.update(dt)
             ball.y = TOP_VIEW_HEIGHT - 4
             ball.dy = -ball.dy
             sounds['wall_hit']:play()
+        end
+
+        if ball.z <= 0 then
+          ball.z = 0
+          ball.dz = -ball.dz * REFLECTION_COEFFICIENT
+          sounds['wall_hit']:play()
         end
 
         -- if we reach the left or right edge of the screen,
