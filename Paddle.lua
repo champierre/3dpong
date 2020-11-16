@@ -49,7 +49,7 @@ function Paddle:update(dt)
     -- height (or else it will go partially below, since position is
     -- based on its top left corner)
     else
-        self.y = math.min(TOP_VIEW_HEIGHT - self.height, self.y + self.dy * dt)
+        self.y = math.min(VIRTUAL_HEIGHT - self.height, self.y + self.dy * dt)
     end
 
     if self.dx > 0 then

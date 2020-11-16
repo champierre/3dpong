@@ -60,8 +60,8 @@ end
 ]]
 function Ball:reset()
     self.x = VIRTUAL_WIDTH / 2 - 2
-    self.y = TOP_VIEW_HEIGHT / 2 - 2
-    self.z = SIDE_VIEW_HEIGHT * 2 / 3
+    self.y = VIRTUAL_HEIGHT / 2 - 2
+    self.z = 0
     self.dy = math.random(2) == 1 and -100 or 100
     self.dx = math.random(-50, 50)
     self.dz = INITIAL_DZ
@@ -80,5 +80,4 @@ end
 
 function Ball:render()
     love.graphics.rectangle('fill', self.x, self.y, self.width * self.z * BALL_SIZE_RATIO, self.height * self.z * BALL_SIZE_RATIO)
-    love.graphics.rectangle('fill', self.x, VIRTUAL_HEIGHT - self.z, self.width, self.height)
 end

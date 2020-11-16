@@ -44,9 +44,6 @@ WINDOW_HEIGHT = 720
 VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
 
-SIDE_VIEW_HEIGHT = 60
-TOP_VIEW_HEIGHT = VIRTUAL_HEIGHT - SIDE_VIEW_HEIGHT
-
 -- speed at which we will move our paddle; multiplied by dt in update
 PADDLE_SPEED = 200
 PADDLE_SIZE = 30
@@ -105,9 +102,9 @@ function love.load()
     servingPlayer = 1
 
     -- initialize player paddles and ball
-    player1 = Paddle(VIRTUAL_WIDTH / 4, TOP_VIEW_HEIGHT / 2, PADDLE_SIZE, PADDLE_SIZE, 1)
-    player2 = Paddle(VIRTUAL_WIDTH / 4 * 3, TOP_VIEW_HEIGHT / 2, PADDLE_SIZE, PADDLE_SIZE, 2)
-    ball = Ball(VIRTUAL_WIDTH / 2 - 2, TOP_VIEW_HEIGHT / 2 - 2, SIDE_VIEW_HEIGHT / 3 * 2, 4, 4)
+    player1 = Paddle(VIRTUAL_WIDTH / 4 - PADDLE_SIZE / 2, VIRTUAL_HEIGHT / 2 - PADDLE_SIZE / 2, PADDLE_SIZE, PADDLE_SIZE, 1)
+    player2 = Paddle(VIRTUAL_WIDTH / 4 * 3 - PADDLE_SIZE / 2, VIRTUAL_HEIGHT / 2 - PADDLE_SIZE / 2, PADDLE_SIZE, PADDLE_SIZE, 2)
+    ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 0, 4, 4)
 
     gameState = 'start'
 end
@@ -172,8 +169,8 @@ function love.update(dt)
         end
 
         -- -4 to account for the ball's size
-        if ball.y >= TOP_VIEW_HEIGHT - 4 then
-            ball.y = TOP_VIEW_HEIGHT - 4
+        if ball.y >= VIRTUAL_HEIGHT - 4 then
+            ball.y = VIRTUAL_HEIGHT - 4
             ball.dy = -ball.dy
             sounds['wall_hit']:play()
         end
@@ -337,7 +334,6 @@ function love.draw()
     -- draw the boundary of top view and side view
     love.graphics.setLineWidth(1)
     love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.line(0, TOP_VIEW_HEIGHT, VIRTUAL_WIDTH, TOP_VIEW_HEIGHT)
 
     push:apply('end')
 end
