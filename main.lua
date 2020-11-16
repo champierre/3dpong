@@ -65,7 +65,7 @@ function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
     -- set the title of our application window
-    love.window.setTitle('Pong')
+    love.window.setTitle('3D Pong')
 
     -- "seed" the RNG so that calls to random are always random
     -- use the current time, since that will vary on startup every time
@@ -307,7 +307,7 @@ function love.draw()
 
     if gameState == 'start' then
         love.graphics.setFont(smallFont)
-        love.graphics.printf('Welcome to Pong!', 0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf('Welcome to 3D Pong!', 0, 10, VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Press Enter to begin!', 0, 20, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'serve' then
         love.graphics.setFont(smallFont)
