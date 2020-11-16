@@ -327,9 +327,8 @@ function love.draw()
 
     player1:render()
     player2:render()
-    ball:render()
-
     displayBallZ()
+    ball:render()
 
     -- draw the boundary of top view and side view
     love.graphics.setLineWidth(1)
@@ -339,12 +338,14 @@ function love.draw()
 end
 
 --[[
-    Renders the current FPS.
+    Renders the Ball Z graph.
 ]]
 function displayBallZ()
     love.graphics.setFont(smallFont)
     love.graphics.setColor(0, 255, 0, 255)
-    love.graphics.print('ball.z: ' .. tostring(ball.z), 10, 10)
+    love.graphics.print('ball.z: ' .. tostring(math.floor(ball.z)), 10, 10)
+
+    love.graphics.line(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT, VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT - ball.z / 2)
 end
 
 
