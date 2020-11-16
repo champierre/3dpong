@@ -76,5 +76,4 @@ end
 ]]
 function Paddle:render()
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
-    -- love.graphics.circle('fill', self.x, self.y, self.radius, 16)
 end

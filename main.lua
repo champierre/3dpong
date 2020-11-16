@@ -51,7 +51,10 @@ TOP_VIEW_HEIGHT = VIRTUAL_HEIGHT - SIDE_VIEW_HEIGHT
 PADDLE_SPEED = 200
 
 GRAVITY = -2
-REFLECTION_COEFFICIENT = 0.8
+REFLECTION_COEFFICIENT = 1
+INITIAL_DZ = 300
+BALL_SIZE_RATIO = 0.05
+VELOCITY_RATIO = 0.1
 
 --[[
     Runs when the game first starts up, only once; used to initialize the game.

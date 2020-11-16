@@ -26,7 +26,7 @@ function Ball:init(x, y, z, width, height)
     -- X and Y axis, since the ball can move in two dimensions
     self.dy = math.random(2) == 1 and -100 or 100
     self.dx = math.random(2) == 1 and math.random(-80, -100) or math.random(80, 100)
-    self.dz = 0
+    self.dz = INITIAL_DZ
 end
 
 --[[
@@ -60,21 +60,21 @@ function Ball:reset()
     self.z = SIDE_VIEW_HEIGHT * 2 / 3
     self.dy = math.random(2) == 1 and -100 or 100
     self.dx = math.random(-50, 50)
-    self.dz = 0
+    self.dz = INITIAL_DZ
 end
 
 --[[
     Simply applies velocity to position, scaled by deltaTime.
 ]]
 function Ball:update(dt)
-    self.x = self.x + self.dx * dt
-    self.y = self.y + self.dy * dt
+    self.x = self.x + self.dx * dt * VELOCITY_RATIO
+    self.y = self.y + self.dy * dt * VELOCITY_RATIO
 
     self.dz = self.dz + GRAVITY
     self.z = self.z + self.dz * dt
 end
 
 function Ball:render()
-    love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+    love.graphics.rectangle('fill', self.x, self.y, self.width * self.z * BALL_SIZE_RATIO, self.height * self.z * BALL_SIZE_RATIO)
     love.graphics.rectangle('fill', self.x, VIRTUAL_HEIGHT - self.z, self.width, self.height)
 end
