@@ -101,8 +101,8 @@ function love.load()
     servingPlayer = 1
 
     -- initialize player paddles and ball
-    player1 = Paddle(10, 30, 5, 20)
-    player2 = Paddle(VIRTUAL_WIDTH - 15, TOP_VIEW_HEIGHT - 30, 5, 20)
+    player1 = Paddle(10, 30, 10, 10, 1)
+    player2 = Paddle(VIRTUAL_WIDTH - 15, TOP_VIEW_HEIGHT - 30, 10, 10, 2)
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, TOP_VIEW_HEIGHT / 2 - 2, SIDE_VIEW_HEIGHT / 3 * 2, 4, 4)
 
     gameState = 'start'
@@ -219,7 +219,12 @@ function love.update(dt)
         player1.dy = -PADDLE_SPEED
     elseif love.keyboard.isDown('s') then
         player1.dy = PADDLE_SPEED
+    elseif love.keyboard.isDown('d') then
+        player1.dx = PADDLE_SPEED
+    elseif love.keyboard.isDown('a') then
+        player1.dx = -PADDLE_SPEED
     else
+        player1.dx = 0
         player1.dy = 0
     end
 
@@ -228,7 +233,12 @@ function love.update(dt)
         player2.dy = -PADDLE_SPEED
     elseif love.keyboard.isDown('down') then
         player2.dy = PADDLE_SPEED
+    elseif love.keyboard.isDown('right') then
+        player2.dx = PADDLE_SPEED
+    elseif love.keyboard.isDown('left') then
+        player2.dx = -PADDLE_SPEED
     else
+        player2.dx = 0
         player2.dy = 0
     end
 

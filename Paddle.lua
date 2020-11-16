@@ -27,12 +27,14 @@ Paddle = Class{}
     have their own x, y, width, and height values, thus serving as containers
     for data. In this sense, they're very similar to structs in C.
 ]]
-function Paddle:init(x, y, width, height)
+function Paddle:init(x, y, width, height, player)
     self.x = x
     self.y = y
     self.width = width
     self.height = height
+    self.dx = 0
     self.dy = 0
+    self.player = player
 end
 
 function Paddle:update(dt)
@@ -49,6 +51,20 @@ function Paddle:update(dt)
     else
         self.y = math.min(TOP_VIEW_HEIGHT - self.height, self.y + self.dy * dt)
     end
+
+    if self.dx > 0 then
+        if self.player == 1 then
+            self.x = math.min(VIRTUAL_WIDTH / 2 - self.width, self.x + self.dx * dt)
+        else
+            self.x = math.min(VIRTUAL_WIDTH - self.width, self.x + self.dx * dt)
+        end
+    else
+        if self.player == 1 then
+            self.x = math.max(0, self.x + self.dx * dt)
+        else
+            self.x = math.max(VIRTUAL_WIDTH / 2, self.x + self.dx * dt)
+        end
+    end
 end
 
 --[[
@@ -60,4 +76,5 @@ end
 ]]
 function Paddle:render()
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+    -- love.graphics.circle('fill', self.x, self.y, self.radius, 16)
 end
