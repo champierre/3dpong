@@ -34,20 +34,24 @@ end
     on whether their rectangles overlap.
 ]]
 function Ball:collides(paddle)
-    -- first, check to see if the left edge of either is farther to the right
-    -- than the right edge of the other
-    if self.x > paddle.x + paddle.width or paddle.x > self.x + self.width then
-        return false
+    if self.x > paddle.x and self.x < paddle.x + paddle.width and self.y > paddle.y and self.y < paddle.y + paddle.height and self.z <= 0 then
+        return true
     end
 
-    -- then check to see if the bottom edge of either is higher than the top
-    -- edge of the other
-    if self.y > paddle.y + paddle.height or paddle.y > self.y + self.height then
-        return false
+    if self.x + self.width > paddle.x and self.x + self.width < paddle.x + paddle.width and self.y > paddle.y and self.y < paddle.y + paddle.height and self.z <= 0 then
+        return true
+    end
+
+    if self.x > paddle.x and self.x < paddle.x + paddle.width and self.y + self.height > paddle.y and self.y + self.height < paddle.y + paddle.height and self.z <= 0 then
+        return true
+    end
+
+    if self.x + self.width > paddle.x and self.x + self.width < paddle.x + paddle.width and self.y + self.height > paddle.y and self.y + self.height < paddle.y + paddle.height and self.z <= 0 then
+        return true
     end
 
     -- if the above aren't true, they're overlapping
-    return true
+    return false
 end
 
 --[[

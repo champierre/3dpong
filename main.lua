@@ -49,12 +49,13 @@ TOP_VIEW_HEIGHT = VIRTUAL_HEIGHT - SIDE_VIEW_HEIGHT
 
 -- speed at which we will move our paddle; multiplied by dt in update
 PADDLE_SPEED = 200
+PADDLE_SIZE = 30
 
 GRAVITY = -2
 REFLECTION_COEFFICIENT = 1
 INITIAL_DZ = 300
 BALL_SIZE_RATIO = 0.05
-VELOCITY_RATIO = 0.1
+VELOCITY_RATIO = 0.2
 
 --[[
     Runs when the game first starts up, only once; used to initialize the game.
@@ -104,8 +105,8 @@ function love.load()
     servingPlayer = 1
 
     -- initialize player paddles and ball
-    player1 = Paddle(10, 30, 10, 10, 1)
-    player2 = Paddle(VIRTUAL_WIDTH - 15, TOP_VIEW_HEIGHT - 30, 10, 10, 2)
+    player1 = Paddle(VIRTUAL_WIDTH / 4, TOP_VIEW_HEIGHT / 2, PADDLE_SIZE, PADDLE_SIZE, 1)
+    player2 = Paddle(VIRTUAL_WIDTH / 4 * 3, TOP_VIEW_HEIGHT / 2, PADDLE_SIZE, PADDLE_SIZE, 2)
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, TOP_VIEW_HEIGHT / 2 - 2, SIDE_VIEW_HEIGHT / 3 * 2, 4, 4)
 
     gameState = 'start'
@@ -331,7 +332,7 @@ function love.draw()
     player2:render()
     ball:render()
 
-    displayFPS()
+    displayBallZ()
 
     -- draw the boundary of top view and side view
     love.graphics.setLineWidth(1)
@@ -344,12 +345,13 @@ end
 --[[
     Renders the current FPS.
 ]]
-function displayFPS()
-    -- simple FPS display across all states
+function displayBallZ()
     love.graphics.setFont(smallFont)
     love.graphics.setColor(0, 255, 0, 255)
-    love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
+    love.graphics.print('ball.z: ' .. tostring(ball.z), 10, 10)
 end
+
+
 
 --[[
     Simply draws the score to the screen.
