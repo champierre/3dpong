@@ -146,6 +146,7 @@ function love.update(dt)
                 ball.dy = math.random(10, 150)
             end
 
+            player1.timer = 0
             sounds['paddle_hit']:play()
         end
         if ball:collides(player2) then
@@ -159,6 +160,7 @@ function love.update(dt)
                 ball.dy = math.random(10, 150)
             end
 
+            player2.timer = 0
             sounds['paddle_hit']:play()
         end
 

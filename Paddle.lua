@@ -35,6 +35,7 @@ function Paddle:init(x, y, width, height, player)
     self.dx = 0
     self.dy = 0
     self.player = player
+    self.timer = 255
 end
 
 function Paddle:update(dt)
@@ -75,5 +76,11 @@ end
     newest version of LÖVE2D, you can even draw rounded rectangles!
 ]]
 function Paddle:render()
+    if self.player == 1 then
+      love.graphics.setColor(255 / 255, self.timer / 255, self.timer / 255, 255 / 255)
+    else
+      love.graphics.setColor(self.timer / 255, self.timer / 255, 255 / 255, 255 / 255)
+    end
+    self.timer = self.timer + 10
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end
