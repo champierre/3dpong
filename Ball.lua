@@ -79,6 +79,10 @@ function Ball:update(dt)
 end
 
 function Ball:render()
-    love.graphics.setColor(255, 255, 0, 255)
+    -- shade
+    love.graphics.setColor(32 / 255, 32 / 255, 32 / 255, 255 / 255)
+    love.graphics.rectangle('fill', self.x + (self.width * self.z * BALL_SIZE_RATIO) / 2 - self.z * SHADE_RATIO, self.y + (self.height * self.z * BALL_SIZE_RATIO) / 2 + self.z * SHADE_RATIO, 4, 4)
+
+    love.graphics.setColor((128 + self.z / 4) / 255, (128 + self.z / 4) / 255, 0 / 255, 255 / 255)
     love.graphics.rectangle('fill', self.x, self.y, math.max(self.width, self.width * self.z * BALL_SIZE_RATIO), math.max(self.height, self.height * self.z * BALL_SIZE_RATIO))
 end

@@ -53,6 +53,7 @@ REFLECTION_COEFFICIENT = 1
 INITIAL_DZ = 300
 BALL_SIZE_RATIO = 0.05
 VELOCITY_RATIO = 0.2
+SHADE_RATIO = 0.2
 
 --[[
     Runs when the game first starts up, only once; used to initialize the game.
@@ -135,8 +136,8 @@ function love.update(dt)
         -- detect ball collision with paddles, reversing dx if true and
         -- slightly increasing it, then altering the dy based on the position of collision
         if ball:collides(player1) then
-            ball.dx = -ball.dx * 1.03
-            ball.x = player1.x + 5
+            ball.dx = -ball.dx * 1
+            -- ball.x = player1.x
 
             -- keep velocity going in the same direction, but randomize it
             if ball.dy < 0 then
@@ -148,8 +149,8 @@ function love.update(dt)
             sounds['paddle_hit']:play()
         end
         if ball:collides(player2) then
-            ball.dx = -ball.dx * 1.03
-            ball.x = player2.x - 4
+            ball.dx = -ball.dx * 1
+            -- ball.x = player2.x
 
             -- keep velocity going in the same direction, but randomize it
             if ball.dy < 0 then
@@ -176,9 +177,9 @@ function love.update(dt)
         end
 
         if ball.z <= 0 then
-          ball.z = 0
-          ball.dz = -ball.dz * REFLECTION_COEFFICIENT
-          sounds['wall_hit']:play()
+            ball.z = 0
+            ball.dz = -ball.dz * REFLECTION_COEFFICIENT
+            sounds['wall_hit']:play()
         end
 
         -- if we reach the left or right edge of the screen,
@@ -343,7 +344,7 @@ end
 function displayBallZ()
     love.graphics.setFont(smallFont)
     love.graphics.setColor(0, 255, 0, 255)
-    love.graphics.print('ball.z: ' .. tostring(math.floor(ball.z)), 10, 10)
+    love.graphics.print('ball.z: ' .. tostring(math.floor(ball.dz)), 10, 10)
 
     love.graphics.line(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT, VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT - ball.z / 2)
 end
