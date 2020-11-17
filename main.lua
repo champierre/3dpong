@@ -55,6 +55,7 @@ INITIAL_DZ = 300
 BALL_SIZE_RATIO = 0.05
 VELOCITY_RATIO = 0.2
 SHADE_RATIO = 0.2
+BALL_SIZE = 4
 
 --[[
     Runs when the game first starts up, only once; used to initialize the game.
@@ -106,7 +107,7 @@ function love.load()
     -- initialize player paddles and ball
     player1 = Paddle(VIRTUAL_WIDTH / 4 - PADDLE_SIZE / 2, VIRTUAL_HEIGHT / 2 - PADDLE_SIZE / 2, PADDLE_SIZE, PADDLE_SIZE, 1)
     player2 = Paddle(VIRTUAL_WIDTH / 4 * 3 - PADDLE_SIZE / 2, VIRTUAL_HEIGHT / 2 - PADDLE_SIZE / 2, PADDLE_SIZE, PADDLE_SIZE, 2)
-    ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 0, 4, 4)
+    ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 0, BALL_SIZE, BALL_SIZE)
 
     gameState = 'start'
 end

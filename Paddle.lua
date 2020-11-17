@@ -55,7 +55,7 @@ function Paddle:update(dt)
 
     if self.dx > 0 then
         if self.player == 1 then
-            self.x = math.min(VIRTUAL_WIDTH / 2 - self.width, self.x + self.dx * dt)
+            self.x = math.min(VIRTUAL_WIDTH / 2 - self.width - BALL_SIZE / 2 - 1, self.x + self.dx * dt)
         else
             self.x = math.min(VIRTUAL_WIDTH - self.width, self.x + self.dx * dt)
         end
@@ -63,7 +63,7 @@ function Paddle:update(dt)
         if self.player == 1 then
             self.x = math.max(0, self.x + self.dx * dt)
         else
-            self.x = math.max(VIRTUAL_WIDTH / 2, self.x + self.dx * dt)
+            self.x = math.max(VIRTUAL_WIDTH / 2 + BALL_SIZE / 2 + 1, self.x + self.dx * dt)
         end
     end
 end
