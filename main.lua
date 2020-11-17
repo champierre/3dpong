@@ -371,8 +371,11 @@ function displayScore()
     -- draw score on the left and right center of the screen
     -- need to switch font to draw before actually printing
     love.graphics.setFont(scoreFont)
+    love.graphics.setColor(255 / 255, 0 / 255, 0 / 255, 255 / 255)
     love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 - 50,
         VIRTUAL_HEIGHT / 3)
+    love.graphics.setColor(0 / 255, 0 / 255, 255 / 255, 255 / 255)
     love.graphics.print(tostring(player2Score), VIRTUAL_WIDTH / 2 + 30,
         VIRTUAL_HEIGHT / 3)
+    love.graphics.setColor(255 / 255, 255 / 255, 255 / 255, 255 / 255)
 end
