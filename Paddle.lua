@@ -82,5 +82,5 @@ function Paddle:render()
       love.graphics.setColor(self.timer / 255, self.timer / 255, 255 / 255, 255 / 255)
     end
     self.timer = self.timer + 10
-    love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+    love.graphics.rectangle('fill', self.x, self.y, math.max(self.width, PADDLE_MINIMUM_SIZE), math.max(self.height, PADDLE_MINIMUM_SIZE))
 end

@@ -47,6 +47,7 @@ VIRTUAL_HEIGHT = 243
 -- speed at which we will move our paddle; multiplied by dt in update
 PADDLE_SPEED = 200
 PADDLE_SIZE = 30
+PADDLE_MINIMUM_SIZE = 4
 
 GRAVITY = -2
 REFLECTION_COEFFICIENT = 1
@@ -147,6 +148,8 @@ function love.update(dt)
             end
 
             player1.timer = 0
+            player1.width = player1.width - 2
+            player1.height = player1.height - 2
             sounds['paddle_hit']:play()
         end
         if ball:collides(player2) then
@@ -161,6 +164,8 @@ function love.update(dt)
             end
 
             player2.timer = 0
+            player2.width = player2.width - 2
+            player2.height = player2.height - 2
             sounds['paddle_hit']:play()
         end
 
@@ -189,6 +194,9 @@ function love.update(dt)
         if ball.x < 0 then
             servingPlayer = 1
             player2Score = player2Score + 1
+            player1.width = PADDLE_SIZE
+            player1.height = PADDLE_SIZE
+
             sounds['score']:play()
 
             -- if we've reached a score of 10, the game is over; set the
@@ -206,6 +214,8 @@ function love.update(dt)
         if ball.x > VIRTUAL_WIDTH then
             servingPlayer = 2
             player1Score = player1Score + 1
+            player2.width = PADDLE_SIZE
+            player2.height = PADDLE_SIZE
             sounds['score']:play()
 
             if player1Score == 10 then
